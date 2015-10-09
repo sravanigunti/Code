@@ -1,0 +1,88 @@
+      <div id="guardEdit" ng-controller="editModeController" ng-show="editMode"> 			
+  			<div class="row text-center">
+  					<h2>Edit Guard</h2>>
+			</div>	
+  			<div class="col-md-8 container">        	  				
+  				<div class="content">  					
+  					<form class="form-horizontal">  					
+  						<fieldset>    
+    						<div class="form-group">      
+      							<label for="guardName" class="col-md-3">
+					                Guard Name:
+					            </label>
+					            <div class="col-md-6">
+					                <input type="text" class="form-control" id="guardName" placeholder="Enter Guard Name">
+					            </div>
+							</div>
+							
+							<div class="form-group">      
+      							<label for="ssn" class="col-md-3">
+					                SSN number:
+					            </label>
+					            <div class="col-md-6">
+					                <input type="text" class="form-control" id="ssn" placeholder="Enter SSN">
+					            </div>
+							</div>
+							
+							<div class="form-group">
+								<label for="buildingAssigned" class="col-md-3">
+					                Buildings assigned:
+					            </label>
+					            <div class="col-md-6">
+					            	<select name="buildingAssigned" id="buildingAssigned" class="form-control">
+					                    <option>--Please Select--</option>
+					                    <option ng-repeat>India</option>
+					                    <option>United States</option>
+					                    <option>Canada</option>
+					                    <option>United Kingdom</option>
+					                    <option>Others</option>
+                					</select>
+					            </div>     
+							</div>
+							
+							<div class="form-group">
+								<label for="startDate" class="col-md-3">
+					                Start Date:
+					            </label>
+					            <div class="col-md-6">                
+					                <div class='input-group date' id='startDate'>
+						                <input type='text' class="form-control" />
+						                <span class="input-group-addon">
+						                    <span class="glyphicon glyphicon-calendar">
+						                    </span>
+						                </span>
+					            	</div>           	          
+					            </div>
+							</div>
+							
+							<div class="form-group">
+								<label for="endDate" class="col-md-3">
+					                End Date:
+					            </label>
+					            <div class="col-md-6">                
+					                <div class='input-group date' id='endDate'>
+						                <input type='text' class="form-control" />
+						                <span class="input-group-addon">
+						                    <span class="glyphicon glyphicon-calendar">
+						                    </span>
+						                </span>
+					            	</div>           	          
+					            </div>
+							</div>													
+						</fieldset>
+					</form>
+					<div class="row">
+			            <div class="col-md-2">
+			            </div>
+			            <div class="col-md-9">
+			                <button type="submit" class="btn btn-info">
+			                    Save changes
+			                </button>
+			                <button class="btn btn-warning">
+			                    Cancel
+			                </button>
+			            </div>
+			        </div>
+				</div>
+			</div>					
+      	</div>

@@ -1,0 +1,172 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workforce Management System</title>
+
+    <link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/css/local.css" />
+
+    <script type="text/javascript" src="/stylesheets/js/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="/stylesheets/bootstrap/js/bootstrap.min.js"></script>   
+    
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>      
+</head>
+<body >
+    <div id="wrapper" ng-app="" ng-controller="workforce" >
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+               <div class="navbar-brand" >Work Force Management System</div>
+            </div>
+            <div class="collapse navbar-collapse navbar-ex1-collapse" >
+            <div ng-show="AdminValue">
+                <ul class="nav navbar-nav side-nav">
+                    <li><a href="./"><i class="fa fa-bullseye"></i> Dashboard</a></li>
+                    <li><a href="./searchClients"><i class="fa fa-tasks"></i> Clients</a></li>
+                    <li class="active"><a href="./searchGuards"><i class="fa fa-tasks"></i> Guards</a></li>
+                    <li ><a href="./searchReports"><i class="fa fa-table"></i> Reports</a></li>
+                    <li><a href="./searchAlerts"><i class="fa fa-bell"></i> Alerts</a></li>
+                    <li><a href="./displaySchedule? Not sure"><i class="fa fa-list-ol"></i> Schedule</a></li>
+                    <li><a href="./searchBuildings"><i class="fa fa-globe"></i> Buildings</a></li>                    
+                </ul>
+            </div>
+            <div ng-show="ClientValue">
+                <ul class="nav navbar-nav side-nav">
+                    <li><a href="./"><i class="fa fa-bullseye"></i> Dashboard</a></li>
+                    <li><a href="./searchClients"><i class="fa fa-tasks"></i> Profile</a></li>
+                       <li ><a href="./searchReports"><i class="fa fa-table"></i> Reports</a></li>
+                    <li><a href="./searchAlerts"><i class="fa fa-bell"></i> Alerts</a></li>
+                </ul>
+            </div>
+            <div ng-show="GuardValue">
+                <ul class="nav navbar-nav side-nav">
+                    <li><a href="./"><i class="fa fa-bullseye"></i> Dashboard</a></li>
+                    <li><a href="./searchClients"><i class="fa fa-tasks"></i> Profile</a></li>
+                       <li ><a href="./searchReports"><i class="fa fa-table"></i> Reports</a></li>
+                    <li><a href="./searchAlerts"><i class="fa fa-bell"></i> Alerts</a></li>
+                    <li><a href="./displaySchedule? Not sure"><i class="fa fa-list-ol"></i> Checkin</a></li>
+                </ul>   
+            </div>
+            <ul class="nav navbar-nav navbar-right navbar-user">                    
+                    <li><a href="./logout"><i class="fa fa-power-off"></i> Log Out</a></li>                       
+                </ul>
+          </div>  
+        </nav>
+<div id="page-wrapper">
+ <div class="row">
+          <div class="col-lg-12">
+            <h1 id="buttons" class="page-header" align="center">Search For Guard</h1>
+          </div>
+        </div>
+  		 	<div>
+            <label for="firstname" class="col-md-2">
+                First Name:
+            </label>
+            <div class="col-md-5">
+                <input type="text" class="form-control" id="name" placeholder="Search By Name">
+            </div></div><br> OR <br> 
+            <div>
+            <label for="firstname" class="col-md-2">
+                Building Name:
+            </label>
+            <div class="col-md-5">
+                <input type="text" class="form-control" id="buildingName" placeholder="Search By Building Name">
+            </div></div><br> OR <br>
+                        <div>
+            <label for="firstname" class="col-md-2">
+                Email ID:
+            </label>
+            <div class="col-md-5">
+                <input type="text" class="form-control" id="email" placeholder="Search By Email ID">
+            </div></div><br> OR <br>
+              <label for="firstname" class="col-md-2">
+                SSN:
+            </label>
+            <div class="col-md-5">
+                <input type="text" class="form-control" id="ssn" placeholder="Search By SSN">
+            </div></div><br><br>
+              <label for="firstname" class="col-md-2">
+                Background Status:
+            </label>
+            <div class="form-group">
+                            <label class="radio-inline">
+                                <input type="radio" name="optionsRadiosInline" id="Completed" value="Completed" checked>
+                                Completed
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="optionsRadiosInline" id="Pending" value="Pending">
+                                Pending
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="optionsRadiosInline" id="inProgress" value="In Progress">
+                                In Progress
+                            </label>
+              </div>
+              <label for="firstname" class="col-md-2"> Start Date  </label>
+              <div class="col-md-5">
+              <input type="date" class="form-control" name="startDate">
+  			  </div>    <br> OR <br>
+  			   <label for="firstname" class="col-md-2"> End Date  </label>
+              <div class="col-md-5">
+              <input type="date" class="form-control" name="endDate">
+  			  </div>    <br><br><br> <div class="col-md-4">   </div>   
+<button type="submit" class="btn btn-info">
+                    Search
+                </button>
+                
+            
+<div class="col-lg-12">
+            <div class="panel panel-primary">
+              <div class="panel-body">
+           A table with editable fields with just patrol details keep ng repeat for table here
+            <table class="table table-bordered"style="width:100%;height=:75%" ng-repeat="mod1 in myscope.modules track by $index">
+				    <tr>
+				      <td>
+				       <a href="./displayGuardDetails" ng-click="dispLink($index)">{{mod1.title}}</a>
+				      </td>
+				    </tr>
+				  </table>  
+           
+              </div>
+            </div>
+
+
+</div>
+</div>
+<script>
+function workforce($scope,$http,$location){
+    	alert("hi");
+	  $scope.myscope = {"modules": [
+			{
+            "title": "name of module1",
+            "description": "description of module1"
+            },
+            {
+            "title": "name of module2",
+            "description": "description of module2"
+         	 }
+        ]};
+      //  $scope.myscope=json;
+      $scope.dispLink = function(name) {
+  		alert(name);
+	}
+	$scope.AdminValue=true;
+   $scope.ClientValue=false;
+   $scope.GuardValue=false;
+    }
+   
+   
+   
+  </script>
+  </body>
+</html>

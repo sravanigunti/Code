@@ -1,0 +1,247 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workforce Management System</title>
+
+    <link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/css/local.css" />
+
+    <script type="text/javascript" src="/stylesheets/js/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="/stylesheets/bootstrap/js/bootstrap.min.js"></script>   
+    
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>     
+	
+	
+</head>
+<body ng-app="myApp" ng-controller="searchAlertController">
+<div>
+    <div id="wrapper">
+    
+        <div class="alert alert-danger" ng-show="errorPanel">
+  			<span class="glyphicon glyphicon-exclamation-sign"></span>
+  			Error: {{errorMsg}}
+		</div>
+<div>
+        <div class="row text-center">
+            <h2>View Alerts</h2>
+        </div>
+ 
+        </br></br>
+        <div>
+            <label for="Building" class="col-md-2">
+                Buildings:
+            </label>
+            <div class="col-md-9">
+                <select name="building" id="building" class="form-control" ng-model="selectedbuilding"  ng-options="building.buildingName for building in buildings">
+                    
+                </select>
+            </div>            
+        </div>
+        </br>
+        </br>
+        <div>
+            <label for="alerttype" class="col-md-2">
+                Alert Type:
+            </label>
+            <div class="col-md-9">
+                <select name="alerttype" id="alerttype" class="form-control" ng-model="selectedalert"  ng-options="alert.alertName for alert in alertcriterias">
+                    
+                </select>
+            </div>            
+        </div>
+                </br>
+        </br>
+         <div>
+            <label for="severitytype" class="col-md-2">
+                Severity Type:
+            </label>
+            <div class="col-md-9">
+                <select name="severitytype" id="severitytype" class="form-control" ng-model="selectedseverity">
+                 <option>High</option>
+                 <option>Medium</option>   
+                 <option>Low</option>      
+                </select>
+            </div>            
+        </div>
+            </br>
+        </br>
+                            <div>
+      							<label class="col-md-2">Alert Date From:</label>
+					            <div class="col-md-9">
+					                <input type="date" class="form-control" ng-model="alertFromdate" placeholder="search on alert date from">
+					            </div>
+							</div>
+							</br>
+        </br>
+							<div>
+      							<label class="col-md-2">Alert Date To:</label>
+					            <div class="col-md-9">
+					                <input type="date" class="form-control" ng-model="alertTodate" placeholder="search on alert date To">
+					            </div>
+							</div>
+							<div>
+							</br>
+							</br>
+							<div>
+        <div class="col-md-2">
+                <button type="submit" class="btn btn-info" ng-click="alertsToDisplay()">
+                    GO
+                </button>
+            </div>
+
+      
+   
+            </div>
+             <div id="searchReport" ng-show="displayMode">
+       <div class="col-md-9">
+  					<h2>Searched Alerts</h2>
+			</div>
+		<div class="col-md-10 container">        	  				
+  				<div class="content">  					
+  					<form class="form-horizontal">  
+    						<div class="form-group">
+ 
+								<table class="table table-striped">		
+								<tr>
+								 
+								<th>Building Name</th>
+								<th>Description</th>
+								<th>Alert Name</th>
+								<th>Severity</th>
+								<th>Alert Time</th>
+								</tr>						
+								<tr ng-repeat="x in alerts">
+								 								 
+								<td>{{x.buildingName}}</td>
+ 								<td>{{x.description}}</td>	
+ 								<td>{{x.alertName}}</td>	
+ 								<td>{{x.severity}}</td>		
+ 								<td>{{x.alertTime}}</td>							 
+								</tr>
+								</table>
+					         </div>
+					     </form>
+					</div>
+			</div>
+		</div>
+  </div>          
+         <script>
+		angular.module('myApp', []).controller('searchAlertController', function($scope,$http,$location) {
+		$scope.displayMode = false;
+ 
+	        
+	       
+		$http({
+	            method: 'POST',
+	            url: '/buildingcriteria',	            
+	             
+	            data: { "clientId" : 1 }
+	         }).success(function(response){
+	         if(response.status !== "fail")
+	            {	
+				  alert(JSON.stringify(response));
+	            $scope.buildings = response;
+	            $scope.displayMode = false;  } 
+	            else{$scope.errorPanel = true; 
+	             $scope.errorMsg="No buildings available";
+	             alert("No buildings available");}  
+	        }).error(function(error){
+	            alert("error");
+	            $scope.errorMsg=error;
+	            $scope.errorPanel = true; 
+	        }); 
+		
+		 
+			
+		$http({
+	            method: 'POST',
+	            url: '/alertcriteria',	            
+	             
+	         }).success(function(response){	
+	          
+	         if(response.status !== "fail")
+	            {
+	            alert(JSON.stringify(response));
+	            $scope.alertcriterias = response;
+	            $scope.displayMode = false; 
+	            }
+	            else { $scope.errorPanel = true;
+	            $scope.errorMsg="No buildings available";
+	             alert("No buildings available");}    
+	        }).error(function(error){
+	             alert("error");
+	            $scope.errorMsg=error;
+	            $scope.errorPanel = true; 
+	        }); 
+		
+ 
+		
+		$scope.alertsToDisplay = function() {				
+				$scope.displayMode = true;
+				$scope.errorPanel = false;
+				 
+				var selectedbuilding = $scope.selectedbuilding;
+				var selectedalert = $scope.selectedalert;
+				var selectedseverity = $scope.selectedseverity;
+				
+				 
+				
+				if(selectedbuilding !== undefined)
+				{var buildingId = $scope.selectedbuilding.buildingId;
+				}
+				else
+				{var buildingId=null;}
+				
+				if(selectedalert !== undefined)
+				{var alertTypeId = $scope.selectedalert.alertTypeId;}
+				else
+				{var alertTypeId=null;}
+				
+				if(selectedseverity !== undefined)
+				{var severity = $scope.selectedseverity;}
+				else
+				{var severity=null;}
+		
+				$http({
+	            method: 'POST',
+	            url: '/searchAlertsResults',	            
+	            data: { "clientId" : 1, "buildingId" : buildingId, "alertTypeId" : alertTypeId, 
+	            "severity" : severity, "alertFromdate" : $scope.alertFromdate, "alertTodate" : $scope.alertTodate }
+	         }).success(function(response){
+	        if(response.status !== "fail")
+	            {
+	            alert(JSON.stringify(response));
+	            $scope.alerts = response;
+	            }
+	            else
+	            {       
+	            alert("invalid search");
+	            alert(JSON.stringify(response));
+	            $scope.displayMode = false; 
+	            $scope.errorPanel = true;   	
+	            $scope.errorMsg="No alerts found for search selection";	
+	            }                 
+	        }).error(function(error){
+	            alert("error");
+	        }); 
+		
+			}
+			
+			$scope.reset = function() {
+			 
+			 
+			}
+    
+});
+</script>
+</body>
+
+
+
+</html>
+        

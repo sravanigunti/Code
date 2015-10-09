@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+     <script src="/js/sweet-alert.js"></script>
+     <link rel="stylesheet" href="/stylesheets/sweet-alert.css">
+     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+     
+	<script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+	 
+	<script src ="/js/addexprow.js"></script>
+		    	<script >
+	    	
+	    	function profController($scope,$http,$location) {
+	    	    
+	    		$scope.signOut = function() {
+	    	    	$http({
+	    	            method: 'GET',
+	    	            url: '/signout',
+	    	        //    data: { "username": $scope.inputUsername, "password": $scope.inputPassword }
+	    	            
+	    	         }).success(function(response){
+	    	           
+	    	            alert(JSON.stringify(response));
+	    	            
+	    	            if(response.status == "success")
+	    	           		window.location = '/';
+	    	            else
+	    	            	sweetAlert("Oops!",response.msg,"error");
+	    	        }).error(function(error){
+	    	        	sweetAlert("Oops! some thing went wrong",error,"error");
+	    	        });
+	    	    };
+	    	    
+	    	    
+	    	    $scope.showProfile = function(){
+	    	    	$http({
+	    	            method: 'GET',
+	    	            url: '/verifyUser',
+	    	        //    data: { "username": $scope.inputUsername, "password": $scope.inputPassword }
+	    	            
+	    	         }).success(function(response){
+	    	           
+	    	            alert(JSON.stringify(response));
+	    	            
+	    	            if(response.status == "success")
+	    	           		window.location = '/showProfile';
+	    	            else
+	    	            	sweetAlert("Oops! some thing went wrong",response.msg,"error");
+	    	        }).error(function(error){
+	    	        	sweetAlert("Oops! ",error,"error");
+	    	        });
+	    	    };
+	    		$scope.showHomepage = function (){
+	    			$http({
+	    		        method: 'GET',
+	    		        url: '/verifyUser',
+	    		    //    data: { "username": $scope.inputUsername, "password": $scope.inputPassword }
+	    		        
+	    		     }).success(function(response){
+	    		       
+	    		        alert(JSON.stringify(response));
+	    		        
+	    		        if(response.status == "success")
+	    		       		window.location = '/successLogin';
+	    		        else
+	    		        	sweetAlert("Oops! some thing went wrong",response.msg,"error");
+	    		    }).error(function(error){
+	    		    	sweetAlert("Oops! ",error,"error");
+	    		    });
+	    		};	
+	    	
+	    	    
+	    	    $scope.getConnect = function(){
+	    	    	$http({
+	    	            method: 'GET',
+	    	            url: '/verifyUser',
+	    	        //    data: { "username": $scope.inputUsername, "password": $scope.inputPassword }
+	    	            
+	    	         }).success(function(response){
+	    	           
+	    	            alert(JSON.stringify(response));
+	    	            
+	    	            if(response.status == "success")
+	    	           		window.location = '/getConnect';
+	    	            else
+	    	            	sweetAlert("Oops! ",response.msg,"error");
+	    	        }).error(function(error){
+	    	        	sweetAlert("Oops! some thing went wrong",error,"error");
+	    	        });
+	    	    };
+	    	    
+	    	    $scope.saveSummary = function() {
+	    	    	  
+	    	    	  var sum = $scope.userSummary;
+	    	    	  
+	    	    	  if(!sum) {
+	    	    		  sweetAlert("Oops!!","Please Enter summary to save","error");
+	    	    		  return false;
+	    	    	  }else{
+	    	    		  sum = sum.trim();
+	    	              $http({
+	    	                    method: 'POST',
+	    	                    url: '/saveSummary',
+	    	                    data: { 
+	    	                            "summary": $scope.userSummary, 
+	    	                           }
+	    	                    
+	    	                 }).success(function(response){
+	    	                   
+	    	                    alert(JSON.stringify(response));
+	    	                    
+	    	                    if(response.status == "success")
+	    	                     	sweetAlert("Summary has been saved successfuly ","","success");
+	    	                    else
+	    	                    	sweetAlert("Oops!",response.msg,"error");
+	    	                }).error(function(error){
+	    	                	sweetAlert("Oops!",error,"error");
+	    	                });  
+	    	    	  }
+	    	        };
+
+	    		    $scope.saveExp = function() {
+	    		    	  
+	    		    	  var no_of_exp =  parseInt(document.getElementById('exp_row_cnt').value);
+	    		    	  var exp_data = {};
+	    		    	  //alert("rows = "+$("#exp_row_cnt").val());
+	    		    	  for(var i = 1 ; i <= no_of_exp ; i++){
+	    		    		  var id = "companyName_"+i;
+	    		    		 // alert(id);
+	    		    		   var comp =document.getElementById(id).value;
+	    		    		   comp = comp.trim();	    		    		  
+	    		    		  if(!comp){
+	    		    			  sweetAlert("Oops!","Please Provide Company Name for Experiences","error");
+	    		    			  return false;
+	    		    		  }else{
+	    		    			  
+	    		    			  exp_data["row_"+i] = { 
+	    		    					  	    					  
+	    		    				"companyname" : document.getElementById("companyName_"+i).value.trim(),
+	    		    				"title" : document.getElementById("inputTitle_"+i).value.trim(),
+	    		    				"location" : document.getElementById("inputLocation_"+i).value.trim(),
+	    		    				"sdate" : document.getElementById("startdate_"+i).value.trim(),
+	    		    				"edate" : document.getElementById("enddate_"+i).value.trim(),
+	    		    				"desc" : document.getElementById("inputDescription_"+i).value.trim()
+	    		    			  };
+	    		    		  }
+	    		    		  
+	    		    		  
+	    		    	  }
+	    		    	  alert(data);
+	    		    	  
+	    		    	  //return false;
+	    		              $http({
+	    		                    method: 'POST',
+	    		                    url: '/saveExp',
+	    		                    data: exp_data,
+	    		                    
+	    		                 }).success(function(response){
+	    		                   
+	    		                    alert(JSON.stringify(response));
+	    		                    
+	    		                    if(response.status == "success")
+	    		                     	sweetAlert("Experience has been saved successfuly ","","success");
+	    		                    else
+	    		                    	sweetAlert("Oops!",response.msg,"error");
+	    		                }).error(function(error){
+	    		                	sweetAlert("Oops!",error,"error");
+	    		                });  
+	    		    	  
+	    		        };
+	    		        
+	    	        
+	    		        
+	    	}
+	    	
+	    	
+	    	
+	    	</script>
+  <style>
+.bfloatr{
+	float:right;
+	
+}
+.bfloatr1{
+	float:right;
+	text-align:left;
+	
+}
+  </style>
+  
+  
+ </head>
+  <body ng-app="" ng-controller="profController" style="margin-top: -50px;margin-left: -50px;margin-right: -50px;">
+  
+  <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <img src="/photos/lnlogo.gif" style="margin-left: 150px;margin-top: 7px;">
+    </div>
+    <div>
+      <ul class="nav navbar-nav">
+        
+        <li ><a  href  ng-click="showHomepage()">Home</a></li>
+        <li class="active"><a href ng-click="showProfile()">Profile</a></li>
+        <li><a href ng-click="getConnect()">Connect</a></li>
+        <li><a href ng-click="signOut()">Sign Out</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+    <h1>Edit Profile</h1>
+    <hr>
+  <div class="row">
+      <!-- left column -->
+      <div class="col-md-3">
+        <div class="text-center">
+          <img src="//placehold.it/100" class="avatar img-circle" alt="avatar">
+          <h6>Upload a different photo...</h6>
+          
+          <input type="file" class="form-control">
+        </div>
+      </div>
+      
+      <!-- edit form column -->
+      <div class="col-md-9 personal-info">
+        
+        <h3>Personal info</h3>
+        
+        
+              <!-- Summary -->
+              <div class="container">
+                <div class="row">
+                    <div class="col-xs-6 col-sm-8 col-md8">
+                        <div class="well well-sm">
+                          <div class="row">
+                             <center><legend>Summary</legend></center>
+                             <form ng-submit="saveSummary()">
+                             <div class="form-group">
+                    
+                                 <textarea ng-model="userSummary" name="userSummary" class="field span5" rows="5" 
+                                 value="userSummary" 
+                                 style="width: 80%; height: 80%; margin-left:70px"></textarea>
+                                 
+                             </div>
+                             <div class="col-md-6 bfloatr">
+					              <input type="submit" class="btn btn-primary" value="Save Changes">
+					              <span></span>
+					              <input type="reset" class="btn btn-default" value="Cancel">
+					            </div>
+                             </form>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+              </div>
+              <div class="container" >
+              <form ng-submit="saveExp()">              
+                <div class="row" id="exp_row_1">
+                    <div class="col-xs-6 col-sm-8 col-md8">
+                        <div class="well well-sm">
+                          <div class="row">
+                             <center><legend>Experience 1</legend></center>
+                             
+                             <div class="form-group">
+                          
+                                <label class="col-sm-2 control-label" for="companyName_1">CompanyName:</label>
+                                <div class="col-sm-9">
+                                  <input type="text" ng-model="companyName_1" id="companyName_1" name="companyName_1" placeholder="" class="form-control">
+                                </div>
+                              </div>
+
+                              <!-- Text input-->
+                              <div class="form-group">
+                                <label class="col-sm-2 control-label" for="inputTitle_1">Title:</label>
+                                <div class="col-sm-9">
+                                  <input type="text" ng-model="inputTitle_1" id="inputTitle_1" name="inputTitle_1" placeholder="" class="form-control">
+                                </div>
+                              </div>
+
+                              <div class="form-group">
+                                <label class="col-sm-2 control-label" for="inputLocation_1">Location:</label>
+                                <div class="col-sm-9">
+                                  <input type="text" ng-model="inputLocation_1" id="inputLocation_1" name="inputLocation_1" placeholder="" class="form-control">
+                                </div>
+                              </div>
+                              <!-- Text input-->
+                              <div class="form-group">
+                                <label class="col-sm-2 control-label" for="startdate_1">Start Date:</label>
+                                <div class="col-sm-9">
+                                  <input type="text" ng-model="startdate_1" id="startdate_1" name="startdate_1" placeholder="YYYY-MM-DD" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" class="form-control">
+                                </div>
+                              </div>
+
+                              <!-- Text input-->
+                              <div class="form-group">
+                                <label class="col-sm-2 control-label" for="enddate_1">End Date:</label>
+                                <div class="col-sm-9">
+                                  <input type="date" ng-model="enddate_1" id="enddate_1" name="enddate_1" placeholder="YYYY-MM-DD" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" class="form-control">
+                                </div>
+                              </div>
+                                <label class="col-sm-2 control-label"  for="inputDescription_1" style="margin-top: 10px;">Description:</label>
+                                <div class="col-sm-9">
+                                  <textarea class="field span5" ng-model="inputDescription_1" name="inputDescription_1" rows="5" id="inputDescription_1" 
+                                 style="width: 100%; "></textarea>
+                                 
+                                </div>
+                                
+                                
+                                
+                              </div>
+                              
+                          </div>
+                        </div>
+                        
+                    </div>
+                    <div>
+                    <span>
+                    <input type="button"  onclick="appendexprow()" value="Add Experience" />
+                    
+                    <!-- <button addbuttons>Add Exp</button> -->
+                    </span>
+                             <span class="col-md-6 bfloatr">
+					              <input type="submit" class="btn btn-primary" value="Save Changes">
+					              
+					              <input type="reset" class="btn btn-default" value="Cancel">
+					            </span>
+					            
+					   
+                </div>
+                </form>
+                </div>
+                <br/>
+              <div class="container">
+                <div class="row">
+                    <div class="col-xs-6 col-sm-8 col-md8">
+                        <div class="well well-sm">
+                          <div class="row">
+                          <form ng-submit="saveEdu()">
+                             <center><legend>Education</legend></center>
+                             <div class="form-group">
+                                <label class="col-sm-2 control-label" for="textinput">School:</label>
+                                <div class="col-sm-9">
+                                  <input type="text" ng-model="inputSchool" name="inputSchool" placeholder="" class="form-control">
+                                </div>
+                              </div>
+
+                              <!-- Text input-->
+                              <div class="form-group">
+                                <label class="col-sm-2 control-label" for="textinput">Field:</label>
+                                <div class="col-sm-9">
+                                  <input type="text" ng-model="inputField" name="inputField" placeholder="" class="form-control">
+                                </div>
+                              </div>
+
+                              <div class="form-group">
+                                <label class="col-sm-2 control-label" for="textinput">Degree level:</label>
+                                <div class="col-sm-9">
+                                  <input type="text" ng-model="level" name="level" placeholder="" class="form-control">
+                                </div>
+                              </div>
+                              <!-- Text input-->
+                              <div class="form-group">
+                                <label class="col-sm-2 control-label" for="textinput">Grade:</label>
+                                <div class="col-sm-9">
+                                  <input type="text" ng-model="inputGrade" name="inputGrade" placeholder="" class="form-control">
+                                </div>
+                              </div>
+
+                              <!-- Text input-->
+                              <div class="form-group">
+                                <label class="col-sm-2 control-label" for="textinput">Start Date:</label>
+                                <div class="col-sm-9">
+                                  <input type="date" ng-model="startdate1" name="startdate1" placeholder="" class="form-control">
+                                </div>
+                              </div>
+
+                                <div class="form-group">
+                                <label class="col-sm-2 control-label" for="textinput">End Date:</label>
+                                <div class="col-sm-9">
+                                  <input type="date" ng-model="enddate1" name="enddate1" placeholder="" class="form-control">
+                                </div>
+                              </div>
+
+                                <label class="col-sm-2 control-label" for="textinput" style="margin-top: 10px;">Description:</label>
+                                <div class="col-sm-9">
+                                  <textarea class="field span5" ng-model="dp" name="dp" rows="5" id="comment" 
+                                 style="width: 100%; "></textarea>
+                                </div>
+                                
+                                </form>                                                                                                                       
+                              </div>
+                              
+                          </div>
+                        </div>
+                    </div>
+                    
+					               <div class="col-md-6 bfloatr">
+					              <input type="submit" class="btn btn-primary" value="Save Changes">
+					              <span></span>
+					              <input type="reset" class="btn btn-default" value="Cancel">
+					            </div>
+                </div>
+              
+  
+        </div>
+
+
+      </div>
+  </div>
+</div>
+<input type="hidden" value=1 id="exp_row_cnt"/>
+<input type="hidden" value=1 id="edu_row_cnt"/>
+  </body>
+</html>

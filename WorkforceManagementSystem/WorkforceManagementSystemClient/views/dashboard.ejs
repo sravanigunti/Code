@@ -1,0 +1,162 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workforce Management System</title>
+
+    <link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/css/local.css" />
+
+    <script type="text/javascript" src="/stylesheets/js/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="/stylesheets/bootstrap/js/bootstrap.min.js"></script>   
+    
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>  
+	
+	<!-- you need to include the shieldui css and js assets in order for the charts to work -->
+    <link rel="stylesheet" type="text/css" href="http://www.shieldui.com/shared/components/latest/css/shieldui-all.min.css" />
+    <link rel="stylesheet" type="text/css" href="http://www.shieldui.com/shared/components/latest/css/light-bootstrap/all.min.css" />
+    <script type="text/javascript" src="http://www.shieldui.com/shared/components/latest/js/shieldui-all.min.js"></script>
+    <script type="text/javascript" src="http://www.prepbootstrap.com/Content/js/gridData.js"></script>   
+</head>
+
+<body ng-app="" ng-controller="dashboardController">
+
+    <div id="wrapper">
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">Back to Admin</a>
+            </div>
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav side-nav">
+                    <li  class="active"><a href="./"><i class="fa fa-bullseye"></i> Dashboard</a></li>
+                    <li><a href="./searchClients"><i class="fa fa-tasks"></i> Clients</a></li>
+                    <li><a href="./searchGuards"><i class="fa fa-tasks"></i> Guards</a></li>
+                    <li><a href="./searchReports"><i class="fa fa-table"></i> Reports</a></li>
+                    <li><a href="./searchAlerts"><i class="fa fa-bell"></i> Alerts</a></li>
+                    <li><a href="./displaySchedule? Not sure"><i class="fa fa-list-ol"></i> Schedule</a></li>
+                    <li><a href="./searchBuildings"><i class="fa fa-globe"></i> Buildings</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right navbar-user">                    
+                    <li><a href="./logout"><i class="fa fa-power-off"></i> Log Out</a></li>                       
+                </ul>
+            </div>
+        </nav>
+
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>Dashboard </h1>
+                </div>
+            </div>
+		</div>
+		
+		<div id="page-wrapper" class="row">
+			<div class="col-lg-8">
+				<div id="map-canvas" style="width:700px;height:500px;"></div>
+			</div>
+			<div class="col-lg-4">
+			<h3><b>Notation</b></h3>
+				<table class="table table-stripped">
+ 					<tr>
+				      <td>
+				        <p align="center"><img src="images/building.png" alt="B"></p>
+				      </td>
+				      <td>
+				      <p align="center">Building</p>
+				      </td>
+ 					</tr>
+  					<tr >
+				      <td>
+				        <p align="center"><img src="images/cp.png" alt="CP"></p>
+				      </td>
+				      <td>
+				      <p align="center">Check Point</p>
+				      </td>
+ 					</tr>
+  					<tr >
+				      <td>
+				        <p align="center"><img src="images/guard.png" alt="G"></p>
+				      </td>
+				      <td>
+				      <p align="center">Guard</p>
+				      </td>
+ 					</tr>
+ 				</table>
+			</div>
+		</div>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=false"></script>
+    <script>
+function dashboardController($scope,$http,$location) {
+		
+	function initialize() {
+		var bounds = new google.maps.LatLngBounds();
+		var markers1 = [
+			['London Eye, London', 51.503454,-0.119562],
+			['Palace of Westminster, London', 30.499633,-30.124755]
+		];
+		var markers2 = [
+			['Cp1', 60.503454,-50.119562],
+			['Cp2', 80.499633,-10.124755]
+		];
+		var markers3 = [
+			['Guard1', 10.503454,-40.119562],
+			['Guard2', 70.499633,-20.124755]
+		];
+		var mapOptions = {
+    		//zoom: 20
+    		//center:new google.maps.LatLng(0,0)
+  		}
+  		var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+  		var image1 = 'images/cp.png';
+  		var image2 = 'images/guard.png';
+		for (var i=0;i<markers1.length;i++) {
+			var latlng = new google.maps.LatLng(markers1[i][1], markers1[i][2]);
+			bounds.extend(latlng);
+  			var marker = new google.maps.Marker({
+      			position: latlng,
+      			map: map,
+      			//draggable:true,
+      			title: markers1[i][0]
+  			});
+  		}
+  		for (var i=0;i<markers2.length;i++) {
+			var latlng = new google.maps.LatLng(markers2[i][1], markers2[i][2]);
+			bounds.extend(latlng);
+  			var marker = new google.maps.Marker({
+      			position: latlng,
+      			map: map,
+      			title: markers2[i][0],
+      			icon:image1
+  			});
+  		}
+  		for (var i=0;i<markers3.length;i++) {
+			var latlng = new google.maps.LatLng(markers3[i][1], markers3[i][2]);
+			bounds.extend(latlng);
+  			var marker = new google.maps.Marker({
+      			position: latlng,
+      			map: map,
+      			title: markers3[i][0],
+      			icon:image2
+  			});
+  		}
+  		map.fitBounds(bounds);
+  		var boundsListener = google.maps.event.addListener((map), 'bounds_changed', function(event) {
+        	this.setZoom(2);
+        	google.maps.event.removeListener(boundsListener);
+    	});
+	}
+	google.maps.event.addDomListener(window, 'load', initialize);
+}
+    </script>
+</body>
+</html>

@@ -1,0 +1,228 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workforce Management System</title>
+
+    <link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/css/local.css" />
+
+    <script type="text/javascript" src="/stylesheets/js/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="/stylesheets/bootstrap/js/bootstrap.min.js"></script>   
+    
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>     
+</head>
+<body >
+	<%include template.ejs %>
+    <div id="wrapper" ng-app="" ng-controller="guardController">               
+        <div class="modal-body row" id="guardDetails" ng-show="displayMode">  			
+  			<div class="row text-center">
+  					<h2> Guard Details </h2>
+			</div>	
+  			<div class="col-md-8 container">        	  				
+  				<div class="content">  					
+  					<form class="form-horizontal">  					
+  						<fieldset>    
+    						<div class="form-group">      
+      							<label for="guardName" class="col-md-3">
+					                Guard Name:
+					            </label>
+					            <div class="col-md-6">
+					                <p class="form-control-static">{{guardDetails.guardName}}</p>
+					            </div>
+							</div>
+							
+							<div class="form-group">      
+      							<label for="ssn" class="col-md-3">
+					                SSN number:
+					            </label>
+					            <div class="col-md-6">
+					                <p class="form-control-static">{{guardDetails.ssn}}</p>
+					            </div>
+							</div>
+							
+							<div class="form-group">
+								<label for="buildingAssigned" class="col-md-3">
+					                Buildings assigned:
+					            </label>
+					            <div class="col-md-6">
+					            	<div ng-repeat="building in guardDetails.buildings">
+					            	<p class="form-control-static">{{building.buildingName}}</p>
+					                </div>
+					            </div>     
+							</div>
+							
+							<div class="form-group">
+								<label for="startDate" class="col-md-3">
+					                Start Date:
+					            </label>
+					            <div class="col-md-6">                
+					                <p class="form-control-static">{{guardDetails.startDate}}</p>            	          
+					            </div>
+							</div>
+							
+							<div class="form-group">
+								<label for="endDate" class="col-md-3">
+					                End Date:
+					            </label>
+					            <div class="col-md-6">                
+					                <p class="form-control-static">{{guardDetails.endDate}}</p>            	          
+					            </div>
+							</div>
+							
+							<div class="form-group">
+								<label for="slot" class="col-md-3">
+					                Slot:
+					            </label>
+					            <div class="col-md-6">                
+					                <p class="form-control-static">{{guardDetails.slot}}</p>            	          
+					            </div>
+							</div>
+							
+							<div class="form-group">
+								<label for="checkpoints" class="col-md-3">
+									Check points:
+								</label>
+								<div class="col-md-6">
+									<table st-table="rowCollection" class="table table-striped">
+										<thead>
+										<tr>
+											<th>S No.</th>
+											<th>Latitude</th>
+											<th>Longitude</th>
+											<th>Building</th>											
+										</tr>
+										</thead>
+										<tbody>
+										<tr ng-repeat="(i, checkpoint) in checkpoints track by $index">
+											<td>{{i+1}}</td>
+											<td>{{checkpoint.latitude}}</td>
+											<td>{{checkpoint.longitude}}</td>
+											<td>{{checkpoint.buildingName}}</td>											
+										</tr>
+										</tbody>
+									</table> 
+								</div>
+							</div>													
+						</fieldset>
+					</form>
+				</div>
+			</div>
+			
+			<div class="col-md-4">				
+				<button type="button" class="btn btn-primary" ng-click="switchToEdit()">
+                    Edit Guard
+                </button>
+                <p>
+                <p>
+                <button type="button" class="btn btn-danger">
+                    Delete Guard
+                </button>
+			</div>
+      	</div>
+    
+    
+	      <div id="guardEdit" ng-show="editMode"> 			
+  			<div class="row text-center">
+  					<h2>Edit Guard</h2>
+			</div>	
+  			<div class="col-md-10 container">        	  				
+  				<div class="content">  					
+  					<form class="form-horizontal">  					
+  						<fieldset>    
+    						<div class="form-group">      
+      							<label for="guardName" class="col-md-3">
+					                Guard Name:
+					            </label>
+					            <div class="col-md-8">
+					                <input type="text" class="form-control" id="editGuardName" ng-model='editGuardName' placeholder="Enter Guard Name" ng-value='guardDetails.guardName'>
+					            </div>
+							</div>
+							
+							<div class="form-group">      
+      							<label for="ssn" class="col-md-3">
+					                SSN number:
+					            </label>
+					            <div class="col-md-8">
+					                <input type="text" class="form-control" id="editssn" ng-model='editssn' placeholder="Enter SSN" ng-value='guardDetails.ssn'>
+					            </div>
+							</div>													
+							
+							<div class="form-group">
+								<label for="startDate" class="col-md-3">
+					                Start Date:
+					            </label>
+					            <div class="col-md-8">                
+					                <div class='input-group date' id='startDate'>
+						                <input type='date' class="form-control" id="editStartDate" ng-model='editStartDate' ng-value='guardDetails.startDate' />						                
+					            	</div>           	          
+					            </div>
+							</div>
+							
+							<div class="form-group">
+								<label for="endDate" class="col-md-3">
+					                End Date:
+					            </label>
+					            <div class="col-md-8">                
+					                <div class='input-group date' id='endDate'>
+						                <input type='date' class="form-control" id="editEndDate" ng-model='editEndDate' ng-value='guardDetails.endDate' />						                
+					            	</div>           	          
+					            </div>
+							</div>													
+						</fieldset>
+					</form>
+					<div class="row text-center">
+			            
+			                <button type="submit" class="btn btn-info" ng-click='saveChanges()'>
+			                    Save changes
+			                </button>
+			                <button type="reset" class="btn btn-warning" ng-click='resetChanges()'>
+			                    Cancel
+			                </button>
+			            
+			        </div>
+				</div>
+			</div>					
+      	</div>
+  	</div>
+      	
+  	<script>
+		function guardController($scope,$http,$location) { 
+			$scope.displayMode = true;
+			$scope.editMode = false;
+			
+			$scope.checkpoints = [
+		        {checkinId: '1', latitude: '30.23212', longitude: '90.3535', buildingName: 'lkdhfkjs'},
+		        {checkinId: '12', latitude: '87.28783', longitude: '90.3535', buildingName: 'syfksf'},
+		        {checkinId: '30', latitude: '12.73846', longitude: '90.3535', buildingName: 'dfuyiuyf'}
+    		];
+    		
+    		$scope.guardDetails = {guardName: 'khdkfh', ssn: '123-874-9823', startDate: '09/10/2015', endDate: '10/20/2015', slot: '8 PM to 8 PM', buildings :[{buildingName: 'ABC'}, {buildingName: 'DEF'}]};
+    		
+			$scope.switchToEdit = function() {				
+				$scope.displayMode = false;
+				$scope.editMode = true;				
+			}	
+			
+			$scope.saveChanges =  function() {
+				//take input from $scope.editGuardName, $scope.editssn, $scope.editStartDate, $scope.editEndDate (ng-model attributes)
+				alert($scope.editGuardName);
+				//update $scope.guardDetails with response
+			}
+			
+			$scope.resetChanges = function() {
+				alert(JSON.stringify($scope.guardDetails));
+				//reset not working
+			}
+		
+		}    
+	</script>      
+</body>
+
+
+
+</html>

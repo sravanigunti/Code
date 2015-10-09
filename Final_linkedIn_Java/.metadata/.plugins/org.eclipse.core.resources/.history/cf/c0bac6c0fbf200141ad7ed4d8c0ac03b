@@ -1,0 +1,337 @@
+<%@page contentType="text/html;charset=UTF-8"%>
+<% request.setCharacterEncoding("UTF-8"); %>
+<HTML>
+<HEAD>
+<TITLE>Result</TITLE>
+</HEAD>
+<BODY>
+<H1>Result</H1>
+
+<jsp:useBean id="sampleServiceProxyid" scope="session" class="Connection.ServiceProxy" />
+<%
+if (request.getParameter("endpoint") != null && request.getParameter("endpoint").length() > 0)
+sampleServiceProxyid.setEndpoint(request.getParameter("endpoint"));
+%>
+
+<%
+String method = request.getParameter("method");
+int methodID = 0;
+if (method == null) methodID = -1;
+
+if(methodID != -1) methodID = Integer.parseInt(method);
+boolean gotMethod = false;
+
+try {
+switch (methodID){ 
+case 2:
+        gotMethod = true;
+        java.lang.String getEndpoint2mtemp = sampleServiceProxyid.getEndpoint();
+if(getEndpoint2mtemp == null){
+%>
+<%=getEndpoint2mtemp %>
+<%
+}else{
+        String tempResultreturnp3 = org.eclipse.jst.ws.util.JspUtils.markup(String.valueOf(getEndpoint2mtemp));
+        %>
+        <%= tempResultreturnp3 %>
+        <%
+}
+break;
+case 5:
+        gotMethod = true;
+        String endpoint_0id=  request.getParameter("endpoint8");
+            java.lang.String endpoint_0idTemp = null;
+        if(!endpoint_0id.equals("")){
+         endpoint_0idTemp  = endpoint_0id;
+        }
+        sampleServiceProxyid.setEndpoint(endpoint_0idTemp);
+break;
+case 10:
+        gotMethod = true;
+        Connection.Service getService10mtemp = sampleServiceProxyid.getService();
+if(getService10mtemp == null){
+%>
+<%=getService10mtemp %>
+<%
+}else{
+        if(getService10mtemp!= null){
+        String tempreturnp11 = getService10mtemp.toString();
+        %>
+        <%=tempreturnp11%>
+        <%
+        }}
+break;
+case 13:
+        gotMethod = true;
+        String userId_1id=  request.getParameter("userId34");
+        int userId_1idTemp  = Integer.parseInt(userId_1id);
+        Connection.Education getEducationById13mtemp = sampleServiceProxyid.getEducationById(userId_1idTemp);
+if(getEducationById13mtemp == null){
+%>
+<%=getEducationById13mtemp %>
+<%
+}else{
+%>
+<TABLE>
+<TR>
+<TD COLSPAN="3" ALIGN="LEFT">returnp:</TD>
+<TR>
+<TD WIDTH="5%"></TD>
+<TD COLSPAN="2" ALIGN="LEFT">level:</TD>
+<TD>
+<%
+if(getEducationById13mtemp != null){
+java.lang.String typelevel16 = getEducationById13mtemp.getLevel();
+        String tempResultlevel16 = org.eclipse.jst.ws.util.JspUtils.markup(String.valueOf(typelevel16));
+        %>
+        <%= tempResultlevel16 %>
+        <%
+}%>
+</TD>
+<TR>
+<TD WIDTH="5%"></TD>
+<TD COLSPAN="2" ALIGN="LEFT">end_date:</TD>
+<TD>
+<%
+if(getEducationById13mtemp != null){
+java.util.Calendar typeend_date18 = getEducationById13mtemp.getEnd_date();
+        java.text.DateFormat dateFormatend_date18 = java.text.DateFormat.getDateInstance();
+        java.util.Date dateend_date18 = typeend_date18.getTime();
+        String tempResultend_date18 = org.eclipse.jst.ws.util.JspUtils.markup(dateFormatend_date18.format(dateend_date18));
+        %>
+        <%= tempResultend_date18 %>
+        <%
+}%>
+</TD>
+<TR>
+<TD WIDTH="5%"></TD>
+<TD COLSPAN="2" ALIGN="LEFT">id:</TD>
+<TD>
+<%
+if(getEducationById13mtemp != null){
+%>
+<%=getEducationById13mtemp.getId()
+%><%}%>
+</TD>
+<TR>
+<TD WIDTH="5%"></TD>
+<TD COLSPAN="2" ALIGN="LEFT">grade:</TD>
+<TD>
+<%
+if(getEducationById13mtemp != null){
+%>
+<%=getEducationById13mtemp.getGrade()
+%><%}%>
+</TD>
+<TR>
+<TD WIDTH="5%"></TD>
+<TD COLSPAN="2" ALIGN="LEFT">start_date:</TD>
+<TD>
+<%
+if(getEducationById13mtemp != null){
+java.util.Calendar typestart_date24 = getEducationById13mtemp.getStart_date();
+        java.text.DateFormat dateFormatstart_date24 = java.text.DateFormat.getDateInstance();
+        java.util.Date datestart_date24 = typestart_date24.getTime();
+        String tempResultstart_date24 = org.eclipse.jst.ws.util.JspUtils.markup(dateFormatstart_date24.format(datestart_date24));
+        %>
+        <%= tempResultstart_date24 %>
+        <%
+}%>
+</TD>
+<TR>
+<TD WIDTH="5%"></TD>
+<TD COLSPAN="2" ALIGN="LEFT">field:</TD>
+<TD>
+<%
+if(getEducationById13mtemp != null){
+java.lang.String typefield26 = getEducationById13mtemp.getField();
+        String tempResultfield26 = org.eclipse.jst.ws.util.JspUtils.markup(String.valueOf(typefield26));
+        %>
+        <%= tempResultfield26 %>
+        <%
+}%>
+</TD>
+<TR>
+<TD WIDTH="5%"></TD>
+<TD COLSPAN="2" ALIGN="LEFT">univ_name:</TD>
+<TD>
+<%
+if(getEducationById13mtemp != null){
+java.lang.String typeuniv_name28 = getEducationById13mtemp.getUniv_name();
+        String tempResultuniv_name28 = org.eclipse.jst.ws.util.JspUtils.markup(String.valueOf(typeuniv_name28));
+        %>
+        <%= tempResultuniv_name28 %>
+        <%
+}%>
+</TD>
+<TR>
+<TD WIDTH="5%"></TD>
+<TD COLSPAN="2" ALIGN="LEFT">description:</TD>
+<TD>
+<%
+if(getEducationById13mtemp != null){
+java.lang.String typedescription30 = getEducationById13mtemp.getDescription();
+        String tempResultdescription30 = org.eclipse.jst.ws.util.JspUtils.markup(String.valueOf(typedescription30));
+        %>
+        <%= tempResultdescription30 %>
+        <%
+}%>
+</TD>
+<TR>
+<TD WIDTH="5%"></TD>
+<TD COLSPAN="2" ALIGN="LEFT">user_id:</TD>
+<TD>
+<%
+if(getEducationById13mtemp != null){
+%>
+<%=getEducationById13mtemp.getUser_id()
+%><%}%>
+</TD>
+</TABLE>
+<%
+}
+break;
+case 36:
+        gotMethod = true;
+        String username_2id=  request.getParameter("username39");
+            java.lang.String username_2idTemp = null;
+        if(!username_2id.equals("")){
+         username_2idTemp  = username_2id;
+        }
+        String password_3id=  request.getParameter("password41");
+            java.lang.String password_3idTemp = null;
+        if(!password_3id.equals("")){
+         password_3idTemp  = password_3id;
+        }
+        int getUserId36mtemp = sampleServiceProxyid.getUserId(username_2idTemp,password_3idTemp);
+        String tempResultreturnp37 = org.eclipse.jst.ws.util.JspUtils.markup(String.valueOf(getUserId36mtemp));
+        %>
+        <%= tempResultreturnp37 %>
+        <%
+break;
+case 43:
+        gotMethod = true;
+        String username_4id=  request.getParameter("username46");
+            java.lang.String username_4idTemp = null;
+        if(!username_4id.equals("")){
+         username_4idTemp  = username_4id;
+        }
+        String password_5id=  request.getParameter("password48");
+            java.lang.String password_5idTemp = null;
+        if(!password_5id.equals("")){
+         password_5idTemp  = password_5id;
+        }
+        java.lang.String signIn43mtemp = sampleServiceProxyid.signIn(username_4idTemp,password_5idTemp);
+if(signIn43mtemp == null){
+%>
+<%=signIn43mtemp %>
+<%
+}else{
+        String tempResultreturnp44 = org.eclipse.jst.ws.util.JspUtils.markup(String.valueOf(signIn43mtemp));
+        %>
+        <%= tempResultreturnp44 %>
+        <%
+}
+break;
+case 50:
+        gotMethod = true;
+        String field_6id=  request.getParameter("field53");
+            java.lang.String field_6idTemp = null;
+        if(!field_6id.equals("")){
+         field_6idTemp  = field_6id;
+        }
+        String level_7id=  request.getParameter("level55");
+            java.lang.String level_7idTemp = null;
+        if(!level_7id.equals("")){
+         level_7idTemp  = level_7id;
+        }
+        String univname_8id=  request.getParameter("univname57");
+            java.lang.String univname_8idTemp = null;
+        if(!univname_8id.equals("")){
+         univname_8idTemp  = univname_8id;
+        }
+        String grade_9id=  request.getParameter("grade59");
+        int grade_9idTemp  = Integer.parseInt(grade_9id);
+        String description_10id=  request.getParameter("description61");
+            java.lang.String description_10idTemp = null;
+        if(!description_10id.equals("")){
+         description_10idTemp  = description_10id;
+        }
+        String userId_11id=  request.getParameter("userId63");
+        int userId_11idTemp  = Integer.parseInt(userId_11id);
+        java.lang.String insertEducation50mtemp = sampleServiceProxyid.insertEducation(field_6idTemp,level_7idTemp,univname_8idTemp,grade_9idTemp,description_10idTemp,userId_11idTemp);
+if(insertEducation50mtemp == null){
+%>
+<%=insertEducation50mtemp %>
+<%
+}else{
+        String tempResultreturnp51 = org.eclipse.jst.ws.util.JspUtils.markup(String.valueOf(insertEducation50mtemp));
+        %>
+        <%= tempResultreturnp51 %>
+        <%
+}
+break;
+case 65:
+        gotMethod = true;
+        String username_12id=  request.getParameter("username68");
+            java.lang.String username_12idTemp = null;
+        if(!username_12id.equals("")){
+         username_12idTemp  = username_12id;
+        }
+        String email_13id=  request.getParameter("email70");
+            java.lang.String email_13idTemp = null;
+        if(!email_13id.equals("")){
+         email_13idTemp  = email_13id;
+        }
+        String password_14id=  request.getParameter("password72");
+            java.lang.String password_14idTemp = null;
+        if(!password_14id.equals("")){
+         password_14idTemp  = password_14id;
+        }
+        java.lang.String signUp65mtemp = sampleServiceProxyid.signUp(username_12idTemp,email_13idTemp,password_14idTemp);
+if(signUp65mtemp == null){
+%>
+<%=signUp65mtemp %>
+<%
+}else{
+        String tempResultreturnp66 = org.eclipse.jst.ws.util.JspUtils.markup(String.valueOf(signUp65mtemp));
+        %>
+        <%= tempResultreturnp66 %>
+        <%
+}
+break;
+case 74:
+        gotMethod = true;
+        String data_15id=  request.getParameter("data77");
+            java.lang.String data_15idTemp = null;
+        if(!data_15id.equals("")){
+         data_15idTemp  = data_15id;
+        }
+        java.lang.String getMD574mtemp = sampleServiceProxyid.getMD5(data_15idTemp);
+if(getMD574mtemp == null){
+%>
+<%=getMD574mtemp %>
+<%
+}else{
+        String tempResultreturnp75 = org.eclipse.jst.ws.util.JspUtils.markup(String.valueOf(getMD574mtemp));
+        %>
+        <%= tempResultreturnp75 %>
+        <%
+}
+break;
+}
+} catch (Exception e) { 
+%>
+Exception: <%= org.eclipse.jst.ws.util.JspUtils.markup(e.toString()) %>
+Message: <%= org.eclipse.jst.ws.util.JspUtils.markup(e.getMessage()) %>
+<%
+return;
+}
+if(!gotMethod){
+%>
+result: N/A
+<%
+}
+%>
+</BODY>
+</HTML>

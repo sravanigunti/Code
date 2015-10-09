@@ -1,0 +1,12 @@
+/**
+ * Service.java
+ *
+ * This file was auto-generated from WSDL
+ * by the Apache Axis 1.4 Apr 22, 2006 (06:55:48 PDT) WSDL2Java emitter.
+ */
+
+package Connection;
+
+public interface Service extends java.rmi.Remote {
+    public java.lang.String insertEducation(java.lang.String field, java.lang.String level, java.lang.String univname, int grade, java.lang.String description, java.util.Calendar startdate, java.util.Calendar enddate, int userId) throws java.rmi.RemoteException;
+}

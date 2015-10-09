@@ -1,0 +1,7 @@
+INDEX VERSION 1.127
+C:\WebClient\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\882082117.index
+\LinkedinClient\src
+C:\WebClient\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2428229634.index
+\LinkedinServicesClient\src
+C:\WebClient\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1523553226.index
+\LinkedinServicesClient\src

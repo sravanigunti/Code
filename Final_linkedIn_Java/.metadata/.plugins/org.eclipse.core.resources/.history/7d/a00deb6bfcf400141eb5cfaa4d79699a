@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:web="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+  <display-name>Linkedin Application</display-name>
+  <welcome-file-list>
+    <welcome-file>/View/Login.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <display-name>SearchUsers</display-name>
+    <servlet-name>SearchUsers</servlet-name>
+    <servlet-class>servlets.SearchUsers</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SearchUsers</servlet-name>
+    <url-pattern>/View/searchUser</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <display-name>DisplayProfile</display-name>
+    <servlet-name>DisplayProfile</servlet-name>
+    <servlet-class>servlets.DisplayProfile</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DisplayProfile</servlet-name>
+    <url-pattern>/View/displayProfile</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <display-name>CreateProfile</display-name>
+    <servlet-name>CreateProfile</servlet-name>
+    <servlet-class>servlets.CreateProfile</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CreateProfile</servlet-name>
+    <url-pattern>/View/createProfile</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <display-name>SignUP</display-name>
+    <servlet-name>SignUp</servlet-name>
+    <servlet-class>servlets.SignUp</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SignUp</servlet-name>
+    <url-pattern>/View/signup</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <display-name>SignIn</display-name>
+    <servlet-name>SignIn</servlet-name>
+    <servlet-class>servlets.SignIn</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SignIn</servlet-name>
+    <url-pattern>/View/signin</url-pattern>
+  </servlet-mapping>
+</web-app>

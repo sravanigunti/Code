@@ -1,0 +1,133 @@
+<%@page contentType="text/html;charset=UTF-8"%>
+<% request.setCharacterEncoding("UTF-8"); %>
+<HTML>
+<HEAD>
+<TITLE>Result</TITLE>
+</HEAD>
+<BODY>
+<H1>Result</H1>
+
+<jsp:useBean id="sampleServiceProxyid" scope="session" class="Connection.ServiceProxy" />
+<%
+if (request.getParameter("endpoint") != null && request.getParameter("endpoint").length() > 0)
+sampleServiceProxyid.setEndpoint(request.getParameter("endpoint"));
+%>
+
+<%
+String method = request.getParameter("method");
+int methodID = 0;
+if (method == null) methodID = -1;
+
+if(methodID != -1) methodID = Integer.parseInt(method);
+boolean gotMethod = false;
+
+try {
+switch (methodID){ 
+case 2:
+        gotMethod = true;
+        java.lang.String getEndpoint2mtemp = sampleServiceProxyid.getEndpoint();
+if(getEndpoint2mtemp == null){
+%>
+<%=getEndpoint2mtemp %>
+<%
+}else{
+        String tempResultreturnp3 = org.eclipse.jst.ws.util.JspUtils.markup(String.valueOf(getEndpoint2mtemp));
+        %>
+        <%= tempResultreturnp3 %>
+        <%
+}
+break;
+case 5:
+        gotMethod = true;
+        String endpoint_0id=  request.getParameter("endpoint8");
+            java.lang.String endpoint_0idTemp = null;
+        if(!endpoint_0id.equals("")){
+         endpoint_0idTemp  = endpoint_0id;
+        }
+        sampleServiceProxyid.setEndpoint(endpoint_0idTemp);
+break;
+case 10:
+        gotMethod = true;
+        Connection.Service getService10mtemp = sampleServiceProxyid.getService();
+if(getService10mtemp == null){
+%>
+<%=getService10mtemp %>
+<%
+}else{
+        if(getService10mtemp!= null){
+        String tempreturnp11 = getService10mtemp.toString();
+        %>
+        <%=tempreturnp11%>
+        <%
+        }}
+break;
+case 13:
+        gotMethod = true;
+        String field_1id=  request.getParameter("field16");
+            java.lang.String field_1idTemp = null;
+        if(!field_1id.equals("")){
+         field_1idTemp  = field_1id;
+        }
+        String level_2id=  request.getParameter("level18");
+            java.lang.String level_2idTemp = null;
+        if(!level_2id.equals("")){
+         level_2idTemp  = level_2id;
+        }
+        String univname_3id=  request.getParameter("univname20");
+            java.lang.String univname_3idTemp = null;
+        if(!univname_3id.equals("")){
+         univname_3idTemp  = univname_3id;
+        }
+        String grade_4id=  request.getParameter("grade22");
+        int grade_4idTemp  = Integer.parseInt(grade_4id);
+        String description_5id=  request.getParameter("description24");
+            java.lang.String description_5idTemp = null;
+        if(!description_5id.equals("")){
+         description_5idTemp  = description_5id;
+        }
+        String startdate_6id=  request.getParameter("startdate26");
+            java.util.Calendar startdate_6idTemp = null;
+        if(!startdate_6id.equals("")){
+        java.text.DateFormat dateFormatstartdate26 = java.text.DateFormat.getDateInstance();
+        java.util.Date dateTempstartdate26  = dateFormatstartdate26.parse(startdate_6id);
+         startdate_6idTemp = new java.util.GregorianCalendar();
+        startdate_6idTemp.setTime(dateTempstartdate26);
+        }
+        String enddate_7id=  request.getParameter("enddate28");
+            java.util.Calendar enddate_7idTemp = null;
+        if(!enddate_7id.equals("")){
+        java.text.DateFormat dateFormatenddate28 = java.text.DateFormat.getDateInstance();
+        java.util.Date dateTempenddate28  = dateFormatenddate28.parse(enddate_7id);
+         enddate_7idTemp = new java.util.GregorianCalendar();
+        enddate_7idTemp.setTime(dateTempenddate28);
+        }
+        String userId_8id=  request.getParameter("userId30");
+        int userId_8idTemp  = Integer.parseInt(userId_8id);
+        java.lang.String insertEducation13mtemp = sampleServiceProxyid.insertEducation(field_1idTemp,level_2idTemp,univname_3idTemp,grade_4idTemp,description_5idTemp,startdate_6idTemp,enddate_7idTemp,userId_8idTemp);
+if(insertEducation13mtemp == null){
+%>
+<%=insertEducation13mtemp %>
+<%
+}else{
+        String tempResultreturnp14 = org.eclipse.jst.ws.util.JspUtils.markup(String.valueOf(insertEducation13mtemp));
+        %>
+        <%= tempResultreturnp14 %>
+        <%
+}
+break;
+}
+} catch (Exception e) { 
+%>
+Exception: <%= org.eclipse.jst.ws.util.JspUtils.markup(e.toString()) %>
+Message: <%= org.eclipse.jst.ws.util.JspUtils.markup(e.getMessage()) %>
+<%
+return;
+}
+if(!gotMethod){
+%>
+result: N/A
+<%
+}
+%>
+</BODY>
+</HTML>

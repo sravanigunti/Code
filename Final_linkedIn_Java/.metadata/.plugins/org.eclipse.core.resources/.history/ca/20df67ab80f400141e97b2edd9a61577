@@ -1,0 +1,120 @@
+<ns1:deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java" xmlns:ns1="http://xml.apache.org/axis/wsdd/">
+ <ns1:globalConfiguration>
+  <ns1:parameter name="sendMultiRefs" value="true"/>
+  <ns1:parameter name="disablePrettyXML" value="true"/>
+  <ns1:parameter name="adminPassword" value="admin"/>
+  <ns1:parameter name="attachments.Directory" value="/Users/Hardik/Documents/HelloWorldServer/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/LinkedinServices/WEB-INF//attachments"/>
+  <ns1:parameter name="dotNetSoapEncFix" value="true"/>
+  <ns1:parameter name="enableNamespacePrefixOptimization" value="false"/>
+  <ns1:parameter name="sendXMLDeclaration" value="true"/>
+  <ns1:parameter name="sendXsiTypes" value="true"/>
+  <ns1:parameter name="attachments.implementation" value="org.apache.axis.attachments.AttachmentsImpl"/>
+  <ns1:requestFlow>
+   <ns1:handler type="java:org.apache.axis.handlers.JWSHandler">
+    <ns1:parameter name="scope" value="session"/>
+   </ns1:handler>
+   <ns1:handler type="java:org.apache.axis.handlers.JWSHandler">
+    <ns1:parameter name="scope" value="request"/>
+    <ns1:parameter name="extension" value=".jwr"/>
+   </ns1:handler>
+  </ns1:requestFlow>
+ </ns1:globalConfiguration>
+ <ns1:handler name="URLMapper" type="java:org.apache.axis.handlers.http.URLMapper"/>
+ <ns1:handler name="Authenticate" type="java:org.apache.axis.handlers.SimpleAuthenticationHandler"/>
+ <ns1:handler name="LocalResponder" type="java:org.apache.axis.transport.local.LocalResponder"/>
+ <ns1:service name="AdminService" provider="java:MSG">
+  <ns1:parameter name="allowedMethods" value="AdminService"/>
+  <ns1:parameter name="enableRemoteAdmin" value="false"/>
+  <ns1:parameter name="className" value="org.apache.axis.utils.Admin"/>
+  <ns1:namespace>http://xml.apache.org/axis/wsdd/</ns1:namespace>
+ </ns1:service>
+ <ns1:service name="Version" provider="java:RPC">
+  <ns1:parameter name="allowedMethods" value="getVersion"/>
+  <ns1:parameter name="className" value="org.apache.axis.Version"/>
+ </ns1:service>
+ <ns1:service name="Service" provider="java:RPC" style="wrapped" use="literal">
+  <ns2:operation name="signIn" qname="ns1:signIn" returnQName="ns1:signInReturn" returnType="xsd:string" soapAction="" xmlns:ns1="http://Connection" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://xml.apache.org/axis/wsdd/">
+   <ns2:parameter qname="ns1:username" type="xsd:string"/>
+   <ns2:parameter qname="ns1:password" type="xsd:string"/>
+  </ns2:operation>
+  <ns1:operation name="insertEducation" qname="ns2:insertEducation" returnQName="ns2:insertEducationReturn" returnType="xsd:string" soapAction="" xmlns:ns2="http://Connection" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns2:field" type="xsd:string"/>
+   <ns1:parameter qname="ns2:level" type="xsd:string"/>
+   <ns1:parameter qname="ns2:univname" type="xsd:string"/>
+   <ns1:parameter qname="ns2:grade" type="xsd:int"/>
+   <ns1:parameter qname="ns2:description" type="xsd:string"/>
+   <ns1:parameter qname="ns2:userId" type="xsd:int"/>
+  </ns1:operation>
+  <ns1:operation name="insertExperience" qname="ns3:insertExperience" returnQName="ns3:insertExperienceReturn" returnType="xsd:string" soapAction="" xmlns:ns3="http://Connection" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns3:companyName" type="xsd:string"/>
+   <ns1:parameter qname="ns3:userId" type="xsd:int"/>
+   <ns1:parameter qname="ns3:title" type="xsd:string"/>
+   <ns1:parameter qname="ns3:location" type="xsd:string"/>
+   <ns1:parameter qname="ns3:description" type="xsd:string"/>
+  </ns1:operation>
+  <ns1:operation name="insertSummary" qname="ns4:insertSummary" returnQName="ns4:insertSummaryReturn" returnType="xsd:string" soapAction="" xmlns:ns4="http://Connection" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns4:summary" type="xsd:string"/>
+   <ns1:parameter qname="ns4:userId" type="xsd:int"/>
+  </ns1:operation>
+  <ns1:operation name="insertSkills" qname="ns5:insertSkills" returnQName="ns5:insertSkillsReturn" returnType="xsd:string" soapAction="" xmlns:ns5="http://Connection" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns5:skills" type="xsd:string"/>
+   <ns1:parameter qname="ns5:userId" type="xsd:int"/>
+  </ns1:operation>
+  <ns1:operation name="getEducationById" qname="ns6:getEducationById" returnQName="ns6:getEducationByIdReturn" returnType="ns6:Education" soapAction="" xmlns:ns6="http://Connection">
+   <ns1:parameter qname="ns6:userId" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:operation name="getSummaryById" qname="ns7:getSummaryById" returnQName="ns7:getSummaryByIdReturn" returnType="ns7:Users" soapAction="" xmlns:ns7="http://Connection">
+   <ns1:parameter qname="ns7:userId" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:operation name="getSkillsById" qname="ns8:getSkillsById" returnQName="ns8:getSkillsByIdReturn" returnType="ns8:Skills" soapAction="" xmlns:ns8="http://Connection">
+   <ns1:parameter qname="ns8:userId" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:operation name="getAllUsers" qname="ns9:getAllUsers" returnQName="ns9:getAllUsersReturn" returnType="xsd:string" soapAction="" xmlns:ns9="http://Connection" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns9:text" type="xsd:string"/>
+  </ns1:operation>
+  <ns1:operation name="signUp" qname="ns10:signUp" returnQName="ns10:signUpReturn" returnType="xsd:string" soapAction="" xmlns:ns10="http://Connection" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns10:username" type="xsd:string"/>
+   <ns1:parameter qname="ns10:email" type="xsd:string"/>
+   <ns1:parameter qname="ns10:password" type="xsd:string"/>
+  </ns1:operation>
+  <ns1:operation name="getMD5" qname="ns11:getMD5" returnQName="ns11:getMD5Return" returnType="xsd:string" soapAction="" xmlns:ns11="http://Connection" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns11:data" type="xsd:string"/>
+  </ns1:operation>
+  <ns1:operation name="getUserId" qname="ns12:getUserId" returnQName="ns12:getUserIdReturn" returnType="xsd:int" soapAction="" xmlns:ns12="http://Connection" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns12:username" type="xsd:string"/>
+   <ns1:parameter qname="ns12:password" type="xsd:string"/>
+  </ns1:operation>
+  <ns1:operation name="getExperienceById" qname="ns13:getExperienceById" returnQName="ns13:getExperienceByIdReturn" returnType="ns13:Experience" soapAction="" xmlns:ns13="http://Connection">
+   <ns1:parameter qname="ns13:userId" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:parameter name="allowedMethods" value="insertExperience getMD5 getAllUsers insertSummary signUp getExperienceById insertSkills insertEducation getSummaryById signIn getEducationById getUserId getSkillsById"/>
+  <ns1:parameter name="wsdlPortType" value="Service"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
+  <ns1:parameter name="schemaQualified" value="http://Connection"/>
+  <ns1:parameter name="wsdlServicePort" value="Service"/>
+  <ns1:parameter name="className" value="Connection.Service"/>
+  <ns1:parameter name="wsdlTargetNamespace" value="http://Connection"/>
+  <ns1:parameter name="wsdlServiceElement" value="ServiceService"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns14:Experience" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:Connection.Experience" xmlns:ns14="http://Connection"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns15:Education" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:Connection.Education" xmlns:ns15="http://Connection"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns16:Skills" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:Connection.Skills" xmlns:ns16="http://Connection"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns17:Users" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:Connection.Users" xmlns:ns17="http://Connection"/>
+ </ns1:service>
+ <ns1:transport name="http">
+  <ns1:requestFlow>
+   <ns1:handler type="URLMapper"/>
+   <ns1:handler type="java:org.apache.axis.handlers.http.HTTPAuthHandler"/>
+  </ns1:requestFlow>
+  <ns1:parameter name="qs:list" value="org.apache.axis.transport.http.QSListHandler"/>
+  <ns1:parameter name="qs:wsdl" value="org.apache.axis.transport.http.QSWSDLHandler"/>
+  <ns1:parameter name="qs.list" value="org.apache.axis.transport.http.QSListHandler"/>
+  <ns1:parameter name="qs.method" value="org.apache.axis.transport.http.QSMethodHandler"/>
+  <ns1:parameter name="qs:method" value="org.apache.axis.transport.http.QSMethodHandler"/>
+  <ns1:parameter name="qs.wsdl" value="org.apache.axis.transport.http.QSWSDLHandler"/>
+ </ns1:transport>
+ <ns1:transport name="local">
+  <ns1:responseFlow>
+   <ns1:handler type="LocalResponder"/>
+  </ns1:responseFlow>
+ </ns1:transport>
+</ns1:deployment>

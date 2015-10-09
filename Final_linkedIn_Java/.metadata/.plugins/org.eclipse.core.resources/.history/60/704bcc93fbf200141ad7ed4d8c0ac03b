@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://Connection" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://Connection" xmlns:intf="http://Connection" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://Connection" xmlns="http://www.w3.org/2001/XMLSchema">
+   <element name="getEducationById">
+    <complexType>
+     <sequence>
+      <element name="userId" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getEducationByIdResponse">
+    <complexType>
+     <sequence>
+      <element name="getEducationByIdReturn" type="impl:Education"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="Education">
+    <sequence>
+     <element name="description" nillable="true" type="xsd:string"/>
+     <element name="end_date" nillable="true" type="xsd:dateTime"/>
+     <element name="field" nillable="true" type="xsd:string"/>
+     <element name="grade" type="xsd:int"/>
+     <element name="id" type="xsd:int"/>
+     <element name="level" nillable="true" type="xsd:string"/>
+     <element name="start_date" nillable="true" type="xsd:dateTime"/>
+     <element name="univ_name" nillable="true" type="xsd:string"/>
+     <element name="user_id" type="xsd:int"/>
+    </sequence>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="getEducationByIdResponse">
+
+      <wsdl:part element="impl:getEducationByIdResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getEducationByIdRequest">
+
+      <wsdl:part element="impl:getEducationById" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="Service">
+
+      <wsdl:operation name="getEducationById">
+
+         <wsdl:input message="impl:getEducationByIdRequest" name="getEducationByIdRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getEducationByIdResponse" name="getEducationByIdResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="ServiceSoapBinding" type="impl:Service">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="getEducationById">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getEducationByIdRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getEducationByIdResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="ServiceService">
+
+      <wsdl:port binding="impl:ServiceSoapBinding" name="Service">
+
+         <wsdlsoap:address location="http://localhost:8080/LinkedinServices/services/Service"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

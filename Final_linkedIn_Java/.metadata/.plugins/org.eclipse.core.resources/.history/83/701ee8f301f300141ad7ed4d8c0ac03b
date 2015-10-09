@@ -1,0 +1,85 @@
+package Connection;
+
+import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
+import java.nio.charset.Charset;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+//import java.beans.Statement;
+import java.sql.*;
+//import com.sun.corba.se.pept.transport.Connection;
+import java.util.Locale;
+
+public class DatabaseConnection {
+	
+	static Connection con = null;
+	//static ResultSet rs;
+	
+	
+	public static Connection getConnection(){
+		try{
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/linkedinservices","root","SjSu@2015");
+			
+		}catch(SQLException e){
+			e.printStackTrace();
+		}catch(InstantiationException e){
+			e.printStackTrace();
+		}catch(IllegalAccessException e){
+			e.printStackTrace();
+		}catch(ClassNotFoundException e){
+			e.printStackTrace();
+		}
+		return con;
+	}
+	
+/*	public String signUp(String username,String email,String password){
+		String result = "";
+		System.out.println("Username:"+username +"email:"+email+"password:"+password);
+		
+		password = getMD5(password);
+		int rowcount;		
+		try{
+			
+			String query = "Insert into User_Details (User_Name,Email_ID,Password) values ('"+username+"','"+email+"','"+password+"')";
+			rowcount = stat.executeUpdate(query);
+			System.out.println(rowcount);
+			if(rowcount > 0){
+				result = "true";
+				System.out.println("Insert Successfully");
+			}
+			else{
+				result="false: The data could not be inserted in the database.";
+			}
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+		return result;
+	}*/
+	
+		
+	/*public String signIn(String email,String password){
+		String result = "false";
+		ResultSet rs=null;
+		System.out.println(email +"pass"+password);
+		int rowcount;		
+		try{
+			
+			String query = "Select password from User_Details where Email_ID='" + email + "'";
+			
+			rs = stat.executeQuery(query);
+			while(rs.next()){
+				String pass = rs.getString("password");
+				password = getMD5(password);
+				if(password.equals(pass)){
+					result = "true";
+				}
+			}
+			rs.close();
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+		return result;
+	}*/
+
+}

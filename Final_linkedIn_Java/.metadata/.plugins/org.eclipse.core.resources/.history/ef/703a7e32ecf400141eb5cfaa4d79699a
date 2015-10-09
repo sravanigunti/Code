@@ -1,0 +1,987 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://Connection" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://Connection" xmlns:intf="http://Connection" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://Connection" xmlns="http://www.w3.org/2001/XMLSchema">
+   <element name="getUserId">
+    <complexType>
+     <sequence>
+      <element name="username" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getUserIdResponse">
+    <complexType>
+     <sequence>
+      <element name="getUserIdReturn" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getMD5">
+    <complexType>
+     <sequence>
+      <element name="data" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getMD5Response">
+    <complexType>
+     <sequence>
+      <element name="getMD5Return" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getExperienceById">
+    <complexType>
+     <sequence>
+      <element name="userId" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getExperienceByIdResponse">
+    <complexType>
+     <sequence>
+      <element name="getExperienceByIdReturn" type="impl:Experience"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="Experience">
+    <sequence>
+     <element name="company_name" nillable="true" type="xsd:string"/>
+     <element name="description" nillable="true" type="xsd:string"/>
+     <element name="id" type="xsd:int"/>
+     <element name="location" nillable="true" type="xsd:string"/>
+     <element name="title" nillable="true" type="xsd:string"/>
+     <element name="user_id" type="xsd:int"/>
+    </sequence>
+   </complexType>
+   <element name="displayInvitation">
+    <complexType>
+     <sequence>
+      <element name="userId" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="displayInvitationResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="displayInvitationReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="signIn">
+    <complexType>
+     <sequence>
+      <element name="username" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="signInResponse">
+    <complexType>
+     <sequence>
+      <element name="signInReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="signUp">
+    <complexType>
+     <sequence>
+      <element name="username" type="xsd:string"/>
+      <element name="email" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="signUpResponse">
+    <complexType>
+     <sequence>
+      <element name="signUpReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="insertEducation">
+    <complexType>
+     <sequence>
+      <element name="field" type="xsd:string"/>
+      <element name="level" type="xsd:string"/>
+      <element name="univname" type="xsd:string"/>
+      <element name="grade" type="xsd:int"/>
+      <element name="description" type="xsd:string"/>
+      <element name="userId" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="insertEducationResponse">
+    <complexType>
+     <sequence>
+      <element name="insertEducationReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="insertExperience">
+    <complexType>
+     <sequence>
+      <element name="companyName" type="xsd:string"/>
+      <element name="userId" type="xsd:int"/>
+      <element name="title" type="xsd:string"/>
+      <element name="location" type="xsd:string"/>
+      <element name="description" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="insertExperienceResponse">
+    <complexType>
+     <sequence>
+      <element name="insertExperienceReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="insertSummary">
+    <complexType>
+     <sequence>
+      <element name="summary" type="xsd:string"/>
+      <element name="userId" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="insertSummaryResponse">
+    <complexType>
+     <sequence>
+      <element name="insertSummaryReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="insertSkills">
+    <complexType>
+     <sequence>
+      <element name="skills" type="xsd:string"/>
+      <element name="userId" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="insertSkillsResponse">
+    <complexType>
+     <sequence>
+      <element name="insertSkillsReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getEducationById">
+    <complexType>
+     <sequence>
+      <element name="userId" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getEducationByIdResponse">
+    <complexType>
+     <sequence>
+      <element name="getEducationByIdReturn" type="impl:Education"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="Education">
+    <sequence>
+     <element name="description" nillable="true" type="xsd:string"/>
+     <element name="end_date" nillable="true" type="xsd:dateTime"/>
+     <element name="field" nillable="true" type="xsd:string"/>
+     <element name="grade" type="xsd:int"/>
+     <element name="id" type="xsd:int"/>
+     <element name="level" nillable="true" type="xsd:string"/>
+     <element name="start_date" nillable="true" type="xsd:dateTime"/>
+     <element name="univ_name" nillable="true" type="xsd:string"/>
+     <element name="user_id" type="xsd:int"/>
+    </sequence>
+   </complexType>
+   <element name="getSummaryById">
+    <complexType>
+     <sequence>
+      <element name="userId" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getSummaryByIdResponse">
+    <complexType>
+     <sequence>
+      <element name="getSummaryByIdReturn" type="impl:Users"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="Users">
+    <sequence>
+     <element name="email_id" nillable="true" type="xsd:string"/>
+     <element name="lastLoginDate" nillable="true" type="xsd:string"/>
+     <element name="loginFlag" nillable="true" type="xsd:string"/>
+     <element name="password" nillable="true" type="xsd:string"/>
+     <element name="summary" nillable="true" type="xsd:string"/>
+     <element name="user_id" type="xsd:int"/>
+     <element name="username" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <element name="getSkillsById">
+    <complexType>
+     <sequence>
+      <element name="userId" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getSkillsByIdResponse">
+    <complexType>
+     <sequence>
+      <element name="getSkillsByIdReturn" type="impl:Skills"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="Skills">
+    <sequence>
+     <element name="id" type="xsd:int"/>
+     <element name="skillset" nillable="true" type="xsd:string"/>
+     <element name="user_id" type="xsd:int"/>
+    </sequence>
+   </complexType>
+   <element name="getAllUsers">
+    <complexType>
+     <sequence>
+      <element name="text" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getAllUsersResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="getAllUsersReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="sendInvitations">
+    <complexType>
+     <sequence>
+      <element name="fromId" type="xsd:int"/>
+      <element name="toId" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="sendInvitationsResponse">
+    <complexType>
+     <sequence>
+      <element name="sendInvitationsReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="getMD5Response">
+
+      <wsdl:part element="impl:getMD5Response" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="signInRequest">
+
+      <wsdl:part element="impl:signIn" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="insertEducationResponse">
+
+      <wsdl:part element="impl:insertEducationResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="signUpRequest">
+
+      <wsdl:part element="impl:signUp" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="insertSummaryRequest">
+
+      <wsdl:part element="impl:insertSummary" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAllUsersResponse">
+
+      <wsdl:part element="impl:getAllUsersResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="signInResponse">
+
+      <wsdl:part element="impl:signInResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="sendInvitationsResponse">
+
+      <wsdl:part element="impl:sendInvitationsResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="insertExperienceResponse">
+
+      <wsdl:part element="impl:insertExperienceResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getExperienceByIdResponse">
+
+      <wsdl:part element="impl:getExperienceByIdResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="insertSkillsResponse">
+
+      <wsdl:part element="impl:insertSkillsResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="sendInvitationsRequest">
+
+      <wsdl:part element="impl:sendInvitations" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getExperienceByIdRequest">
+
+      <wsdl:part element="impl:getExperienceById" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="insertEducationRequest">
+
+      <wsdl:part element="impl:insertEducation" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getUserIdResponse">
+
+      <wsdl:part element="impl:getUserIdResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="insertExperienceRequest">
+
+      <wsdl:part element="impl:insertExperience" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getMD5Request">
+
+      <wsdl:part element="impl:getMD5" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="insertSummaryResponse">
+
+      <wsdl:part element="impl:insertSummaryResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="displayInvitationResponse">
+
+      <wsdl:part element="impl:displayInvitationResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="signUpResponse">
+
+      <wsdl:part element="impl:signUpResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getSummaryByIdRequest">
+
+      <wsdl:part element="impl:getSummaryById" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getSkillsByIdResponse">
+
+      <wsdl:part element="impl:getSkillsByIdResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getEducationByIdResponse">
+
+      <wsdl:part element="impl:getEducationByIdResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getSummaryByIdResponse">
+
+      <wsdl:part element="impl:getSummaryByIdResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getSkillsByIdRequest">
+
+      <wsdl:part element="impl:getSkillsById" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getUserIdRequest">
+
+      <wsdl:part element="impl:getUserId" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="insertSkillsRequest">
+
+      <wsdl:part element="impl:insertSkills" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAllUsersRequest">
+
+      <wsdl:part element="impl:getAllUsers" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="displayInvitationRequest">
+
+      <wsdl:part element="impl:displayInvitation" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getEducationByIdRequest">
+
+      <wsdl:part element="impl:getEducationById" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="Service">
+
+      <wsdl:operation name="getUserId">
+
+         <wsdl:input message="impl:getUserIdRequest" name="getUserIdRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getUserIdResponse" name="getUserIdResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getMD5">
+
+         <wsdl:input message="impl:getMD5Request" name="getMD5Request">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getMD5Response" name="getMD5Response">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getExperienceById">
+
+         <wsdl:input message="impl:getExperienceByIdRequest" name="getExperienceByIdRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getExperienceByIdResponse" name="getExperienceByIdResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="displayInvitation">
+
+         <wsdl:input message="impl:displayInvitationRequest" name="displayInvitationRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:displayInvitationResponse" name="displayInvitationResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="signIn">
+
+         <wsdl:input message="impl:signInRequest" name="signInRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:signInResponse" name="signInResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="signUp">
+
+         <wsdl:input message="impl:signUpRequest" name="signUpRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:signUpResponse" name="signUpResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="insertEducation">
+
+         <wsdl:input message="impl:insertEducationRequest" name="insertEducationRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:insertEducationResponse" name="insertEducationResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="insertExperience">
+
+         <wsdl:input message="impl:insertExperienceRequest" name="insertExperienceRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:insertExperienceResponse" name="insertExperienceResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="insertSummary">
+
+         <wsdl:input message="impl:insertSummaryRequest" name="insertSummaryRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:insertSummaryResponse" name="insertSummaryResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="insertSkills">
+
+         <wsdl:input message="impl:insertSkillsRequest" name="insertSkillsRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:insertSkillsResponse" name="insertSkillsResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getEducationById">
+
+         <wsdl:input message="impl:getEducationByIdRequest" name="getEducationByIdRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getEducationByIdResponse" name="getEducationByIdResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getSummaryById">
+
+         <wsdl:input message="impl:getSummaryByIdRequest" name="getSummaryByIdRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getSummaryByIdResponse" name="getSummaryByIdResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getSkillsById">
+
+         <wsdl:input message="impl:getSkillsByIdRequest" name="getSkillsByIdRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getSkillsByIdResponse" name="getSkillsByIdResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAllUsers">
+
+         <wsdl:input message="impl:getAllUsersRequest" name="getAllUsersRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getAllUsersResponse" name="getAllUsersResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="sendInvitations">
+
+         <wsdl:input message="impl:sendInvitationsRequest" name="sendInvitationsRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:sendInvitationsResponse" name="sendInvitationsResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="ServiceSoapBinding" type="impl:Service">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="getUserId">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getUserIdRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getUserIdResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getMD5">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getMD5Request">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getMD5Response">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getExperienceById">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getExperienceByIdRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getExperienceByIdResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="displayInvitation">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="displayInvitationRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="displayInvitationResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="signIn">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="signInRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="signInResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="signUp">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="signUpRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="signUpResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="insertEducation">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="insertEducationRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="insertEducationResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="insertExperience">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="insertExperienceRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="insertExperienceResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="insertSummary">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="insertSummaryRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="insertSummaryResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="insertSkills">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="insertSkillsRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="insertSkillsResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getEducationById">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getEducationByIdRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getEducationByIdResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getSummaryById">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getSummaryByIdRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getSummaryByIdResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getSkillsById">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getSkillsByIdRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getSkillsByIdResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAllUsers">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getAllUsersRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getAllUsersResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="sendInvitations">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="sendInvitationsRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="sendInvitationsResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="ServiceService">
+
+      <wsdl:port binding="impl:ServiceSoapBinding" name="Service">
+
+         <wsdlsoap:address location="http://localhost:8080/LinkedinServices/services/Service"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

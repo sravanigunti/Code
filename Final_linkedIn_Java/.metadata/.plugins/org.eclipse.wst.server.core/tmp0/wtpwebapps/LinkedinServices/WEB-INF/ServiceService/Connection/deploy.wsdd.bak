@@ -1,0 +1,137 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from ServiceService WSDL service -->
+
+  <service name="Service" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://Connection"/>
+      <parameter name="wsdlServiceElement" value="ServiceService"/>
+      <parameter name="schemaQualified" value="http://Connection"/>
+      <parameter name="wsdlServicePort" value="Service"/>
+      <parameter name="className" value="Connection.ServiceSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="Service"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="getUserId" qname="operNS:getUserId" xmlns:operNS="http://Connection" returnQName="retNS:getUserIdReturn" xmlns:retNS="http://Connection" returnType="rtns:int" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:username" xmlns:pns="http://Connection" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:password" xmlns:pns="http://Connection" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="signUp" qname="operNS:signUp" xmlns:operNS="http://Connection" returnQName="retNS:signUpReturn" xmlns:retNS="http://Connection" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:username" xmlns:pns="http://Connection" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:email" xmlns:pns="http://Connection" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:password" xmlns:pns="http://Connection" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getUserNameById" qname="operNS:getUserNameById" xmlns:operNS="http://Connection" returnQName="retNS:getUserNameByIdReturn" xmlns:retNS="http://Connection" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:userId" xmlns:pns="http://Connection" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="signIn" qname="operNS:signIn" xmlns:operNS="http://Connection" returnQName="retNS:signInReturn" xmlns:retNS="http://Connection" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:username" xmlns:pns="http://Connection" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:password" xmlns:pns="http://Connection" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="insertEducation" qname="operNS:insertEducation" xmlns:operNS="http://Connection" returnQName="retNS:insertEducationReturn" xmlns:retNS="http://Connection" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:field" xmlns:pns="http://Connection" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:level" xmlns:pns="http://Connection" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:univname" xmlns:pns="http://Connection" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:grade" xmlns:pns="http://Connection" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:description" xmlns:pns="http://Connection" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:userId" xmlns:pns="http://Connection" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="insertExperience" qname="operNS:insertExperience" xmlns:operNS="http://Connection" returnQName="retNS:insertExperienceReturn" xmlns:retNS="http://Connection" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:companyName" xmlns:pns="http://Connection" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:userId" xmlns:pns="http://Connection" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:title" xmlns:pns="http://Connection" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:location" xmlns:pns="http://Connection" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:description" xmlns:pns="http://Connection" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="insertSummary" qname="operNS:insertSummary" xmlns:operNS="http://Connection" returnQName="retNS:insertSummaryReturn" xmlns:retNS="http://Connection" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:summary" xmlns:pns="http://Connection" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:userId" xmlns:pns="http://Connection" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="insertSkills" qname="operNS:insertSkills" xmlns:operNS="http://Connection" returnQName="retNS:insertSkillsReturn" xmlns:retNS="http://Connection" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:skills" xmlns:pns="http://Connection" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:userId" xmlns:pns="http://Connection" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getEducationById" qname="operNS:getEducationById" xmlns:operNS="http://Connection" returnQName="retNS:getEducationByIdReturn" xmlns:retNS="http://Connection" returnType="rtns:Education" xmlns:rtns="http://Connection" soapAction="" >
+        <parameter qname="pns:userId" xmlns:pns="http://Connection" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getSummaryById" qname="operNS:getSummaryById" xmlns:operNS="http://Connection" returnQName="retNS:getSummaryByIdReturn" xmlns:retNS="http://Connection" returnType="rtns:Users" xmlns:rtns="http://Connection" soapAction="" >
+        <parameter qname="pns:userId" xmlns:pns="http://Connection" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getSkillsById" qname="operNS:getSkillsById" xmlns:operNS="http://Connection" returnQName="retNS:getSkillsByIdReturn" xmlns:retNS="http://Connection" returnType="rtns:Skills" xmlns:rtns="http://Connection" soapAction="" >
+        <parameter qname="pns:userId" xmlns:pns="http://Connection" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getAllUsers" qname="operNS:getAllUsers" xmlns:operNS="http://Connection" returnQName="retNS:getAllUsersReturn" xmlns:retNS="http://Connection" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:text" xmlns:pns="http://Connection" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getUserIdByName" qname="operNS:getUserIdByName" xmlns:operNS="http://Connection" returnQName="retNS:getUserIdByNameReturn" xmlns:retNS="http://Connection" returnType="rtns:int" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:username" xmlns:pns="http://Connection" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="sendInvitations" qname="operNS:sendInvitations" xmlns:operNS="http://Connection" returnQName="retNS:sendInvitationsReturn" xmlns:retNS="http://Connection" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:fromId" xmlns:pns="http://Connection" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:toId" xmlns:pns="http://Connection" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getConnectionID" qname="operNS:getConnectionID" xmlns:operNS="http://Connection" returnQName="retNS:getConnectionIDReturn" xmlns:retNS="http://Connection" returnType="rtns:int" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:userId" xmlns:pns="http://Connection" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getMD5" qname="operNS:getMD5" xmlns:operNS="http://Connection" returnQName="retNS:getMD5Return" xmlns:retNS="http://Connection" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:data" xmlns:pns="http://Connection" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getExperienceById" qname="operNS:getExperienceById" xmlns:operNS="http://Connection" returnQName="retNS:getExperienceByIdReturn" xmlns:retNS="http://Connection" returnType="rtns:Experience" xmlns:rtns="http://Connection" soapAction="" >
+        <parameter qname="pns:userId" xmlns:pns="http://Connection" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="displayInvitation" qname="operNS:displayInvitation" xmlns:operNS="http://Connection" returnQName="retNS:displayInvitationReturn" xmlns:retNS="http://Connection" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:userId" xmlns:pns="http://Connection" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="acceptInvitations" qname="operNS:acceptInvitations" xmlns:operNS="http://Connection" returnQName="retNS:acceptInvitationsReturn" xmlns:retNS="http://Connection" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:connectionId" xmlns:pns="http://Connection" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="rejectInvitations" qname="operNS:rejectInvitations" xmlns:operNS="http://Connection" returnQName="retNS:rejectInvitationsReturn" xmlns:retNS="http://Connection" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:connectionId" xmlns:pns="http://Connection" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="displayConnections" qname="operNS:displayConnections" xmlns:operNS="http://Connection" returnQName="retNS:displayConnectionsReturn" xmlns:retNS="http://Connection" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:userId" xmlns:pns="http://Connection" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <parameter name="allowedMethods" value="insertExperience getMD5 getAllUsers displayConnections insertSummary getUserNameById sendInvitations signUp getExperienceById insertSkills rejectInvitations insertEducation getSummaryById signIn acceptInvitations getEducationById getUserIdByName displayInvitation getConnectionID getUserId getSkillsById"/>
+
+      <typeMapping
+        xmlns:ns="http://Connection"
+        qname="ns:Skills"
+        type="java:Connection.Skills"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://Connection"
+        qname="ns:Experience"
+        type="java:Connection.Experience"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://Connection"
+        qname="ns:Education"
+        type="java:Connection.Education"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://Connection"
+        qname="ns:Users"
+        type="java:Connection.Users"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+  </service>
+</deployment>
